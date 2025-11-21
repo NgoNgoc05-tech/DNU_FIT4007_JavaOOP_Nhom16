@@ -2,27 +2,28 @@ package com.dnu.sportsclub.service;
 
 import com.dnu.sportsclub.exception.ScheduleConflictException;
 import com.dnu.sportsclub.interfaces.Schedulable;
-import com.dnu.sportsclub.model.abstract_class.Schedule; // <-- SỬA Ở ĐÂY
+import com.dnu.sportsclub.model.Schedule;
 import java.util.List;
 
 public class ScheduleService implements Schedulable {
-    private final List<Schedule> schedules;
+    private final List<Schedule> existingSchedules;
 
-    public ScheduleService(List<Schedule> schedules) {
-        this.schedules = schedules;
+    public ScheduleService(List<Schedule> existingSchedules) {
+        this.existingSchedules = existingSchedules;
     }
 
     @Override
     public void registerSchedule(Schedule newSched) throws ScheduleConflictException {
-        for (Schedule s : schedules) {
-            // Check trùng HLV
+        for (Schedule s : existingSchedules) {
+            // Logic: Nếu trùng HLV và thời gian đè lên nhau
             if (s.getCoachId().equals(newSched.getCoachId())) {
-                // Logic: (StartA < EndB) && (EndA > StartB) là bị trùng giờ
-                if (newSched.getStart().isBefore(s.getEnd()) && newSched.getEnd().isAfter(s.getStart())) {
-                    throw new ScheduleConflictException("HLV đang bận trong khung giờ này!");
+                if (newSched.getStartTime().isBefore(s.getEndTime()) &&
+                        newSched.getEndTime().isAfter(s.getStartTime())) {
+                    throw new ScheduleConflictException("HLV " + s.getCoachId() + " đang bận!");
                 }
             }
         }
-        schedules.add(newSched);
+        existingSchedules.add(newSched);
+        System.out.println("Đăng ký lịch thành công!");
     }
 }

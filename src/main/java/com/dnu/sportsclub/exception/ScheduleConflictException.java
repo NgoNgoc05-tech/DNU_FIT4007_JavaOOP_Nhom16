@@ -1,4 +1,5 @@
 package com.dnu.sportsclub.exception;
 
-public class ScheduleConflictException {
+public class ScheduleConflictException extends Exception {
+    public ScheduleConflictException(String message) { super(message); }
 }
