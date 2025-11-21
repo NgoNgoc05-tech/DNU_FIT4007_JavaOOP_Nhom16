@@ -1,4 +1,4 @@
-package main.java.com.dnu.sportsclub.interfaces;
+package com.dnu.sportsclub.interfaces;
 
 import java.util.List;
 
