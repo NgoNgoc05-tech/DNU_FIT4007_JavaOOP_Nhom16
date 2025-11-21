@@ -28,6 +28,10 @@ public abstract class Competition implements Serializable {
         this.participantIds = new ArrayList<>();
         this.scores = new HashMap<>();
     }
+
+    public Competition(String id, String name) {
+    }
+
     //Methods quản lý cơ bản
     public void addParticipant(String menberId)
     {
@@ -65,4 +69,6 @@ public abstract class Competition implements Serializable {
     }
     @Override
     public abstract String toString();
+
+    public abstract String getType();
 }

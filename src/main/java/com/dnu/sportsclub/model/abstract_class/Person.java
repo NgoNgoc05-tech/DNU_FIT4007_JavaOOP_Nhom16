@@ -16,6 +16,9 @@ public abstract class Person implements Serializable {
         this.email = email;
     }
 
+    public Person(String id, String name, String phone) {
+    }
+
     // Getter & Setter
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
