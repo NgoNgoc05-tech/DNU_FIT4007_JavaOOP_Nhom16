@@ -1,4 +1,8 @@
-package main.java.com.dnu.sportsclub.interfaces;
+package com.dnu.sportsclub.interfaces;
 
-public class Persistable {
+import java.util.List;
+
+public interface Persistable<T> {
+    void save(List<T> data);
+    List<T> load();
 }
